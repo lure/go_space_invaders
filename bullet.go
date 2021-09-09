@@ -10,12 +10,17 @@ const (
 
 func newBullet(renderer *sdl.Renderer) *element {
 	e := &element{}
-
+	e.tag = "bullet"
 	sr := newSpriteRenderer(e, renderer, "sprites/bullet.bmp")
 	e.addComponent(sr)
 	mover := newBulletMover(e, bulletSpeed)
 	e.addComponent(mover)
 
+	col := circle{
+		center: e.position,
+		radius: 8,
+	}
+	e.collisions = append(e.collisions, col)
 	return e
 }
 

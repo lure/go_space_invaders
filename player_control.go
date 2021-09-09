@@ -42,18 +42,20 @@ func (mover *keyboardMover) onDraw(renderer *sdl.Renderer) error {
 	return nil
 }
 
+func (mover *keyboardMover) onCollision(other *element) error {
+	return nil
+}
 
 type keyboardShooter struct {
 	container *element
-	cooldown time.Duration
-	lastShot time.Time
+	cooldown  time.Duration
+	lastShot  time.Time
 }
 
-
-func newKeyboardShooter(container *element, cooldown time.Duration) * keyboardShooter{
-	return &keyboardShooter {
-		container : container,
-		cooldown: cooldown,
+func newKeyboardShooter(container *element, cooldown time.Duration) *keyboardShooter {
+	return &keyboardShooter{
+		container: container,
+		cooldown:  cooldown,
 	}
 }
 
@@ -72,6 +74,10 @@ func (shooter *keyboardShooter) onUpdate() error {
 }
 
 func (shooter *keyboardShooter) onDraw(renderer *sdl.Renderer) error {
+	return nil
+}
+
+func (shooter *keyboardShooter) onCollision(other *element) error {
 	return nil
 }
 

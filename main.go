@@ -51,9 +51,9 @@ func main() {
 	// ENEMIES
 	for i := 0; i < 5; i++ {
 		for j := 0; j < 3; j++ {
-			x := (float64(i) / 5) * screenWidth + (beSize / 2)
-			y := float64(j) * beSize + (beSize / 2)
-			enemy := newBasicEnemy(renderer, vector { x: x, y: y})
+			x := (float64(i)/5)*screenWidth + (beSize / 2)
+			y := float64(j)*beSize + (beSize / 2)
+			enemy := newBasicEnemy(renderer, vector{x: x, y: y})
 			elements = append(elements, enemy)
 		}
 	}
@@ -91,7 +91,11 @@ func main() {
 			}
 		}
 
+		if err := checkCollisions(); err != nil {
+			fmt.Println("checking collision:", err)
+			return
+		}
+
 		renderer.Present()
 	}
 }
-
