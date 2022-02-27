@@ -11,6 +11,7 @@ type spriteRenderer struct {
 	width, height float64
 }
 
+// todo accept texture as argument
 func newSpriteRenderer(container *element, renderer *sdl.Renderer, filename string) *spriteRenderer {
 	tex := textureFromBMP(renderer, filename)
 	_, _, width, height, err := tex.Query()

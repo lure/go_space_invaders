@@ -3,12 +3,17 @@ package main
 import (
 	"fmt"
 	"github.com/veandco/go-sdl2/sdl"
+	"time"
 )
 
 const (
 	screenWidth  = 600
 	screenHeight = 800
+
+	targetTicksPerSecond float64 = 60.0
 )
+
+var delta float64
 
 func main() {
 	if err := sdl.Init(sdl.INIT_EVERYTHING); err != nil {
@@ -65,6 +70,7 @@ func main() {
 	// ------------------------------------------------------------------------------------------------
 	// GAME LOOP
 	for {
+		frameStartTime := time.Now()
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
 			switch event.(type) {
 			case *sdl.QuitEvent:
@@ -77,13 +83,13 @@ func main() {
 
 		for _, elem := range elements {
 			if elem.active {
-				elem.update()
+				err = elem.update()
 				if err != nil {
 					fmt.Println("updating element:", err)
 					return
 				}
 
-				elem.draw(renderer)
+				err = elem.draw(renderer)
 				if err != nil {
 					fmt.Println("drawing element:", err)
 					return
@@ -97,5 +103,7 @@ func main() {
 		}
 
 		renderer.Present()
+
+		delta = time.Since(frameStartTime).Seconds() * targetTicksPerSecond
 	}
 }

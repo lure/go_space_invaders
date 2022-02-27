@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	playerSpeed        = 0.05
+	playerSpeed        = 5
 	playerShotCooldown = time.Millisecond * 250
 )
 
@@ -21,7 +21,6 @@ func newPlayer(renderer *sdl.Renderer) *element {
 		y: screenHeight - sr.height/2.0,
 	}
 	e.active = true
-
 
 	mover := newKeyboardMover(e, playerSpeed)
 	e.addComponent(mover)
